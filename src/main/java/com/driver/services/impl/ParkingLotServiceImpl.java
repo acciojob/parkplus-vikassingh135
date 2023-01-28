@@ -43,7 +43,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
           spot.setReservationList(new ArrayList<>());
           
           parkingLotRepository1.save(parkingLot);
-          spotRepository1.save(spot);
+//          spotRepository1.save(spot);
           return spot;
     }
 
@@ -62,7 +62,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
            //spot.setOccupied(true);
            parkingLot.getSpotList().add(spot);
            parkingLotRepository1.save(parkingLot);
-           spotRepository1.save(spot);
+//           spotRepository1.save(spot);
            return spot;
     }
 
