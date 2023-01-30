@@ -33,7 +33,9 @@ public class PaymentServiceImpl implements PaymentService {
         } else if(mode.toLowerCase().equals("upi")) {
             payment.setPaymentMode(PaymentMode.UPI);
         } else throw new Exception("Payment mode not detected");
+        
         payment.setReservation(reservation);
+        reservation.setPayment(payment);
         payment.setPaymentCompleted(true);
         paymentRepository2.save(payment);
         return payment;
