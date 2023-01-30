@@ -7,6 +7,7 @@ package com.driver.model;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +26,7 @@ public class Spot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
+    @Enumerated
     private SpotType spotType;
     
     private int pricePerHour;
