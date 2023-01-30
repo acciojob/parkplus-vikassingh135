@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     public User updatePassword(Integer userId, String password) {
         User user = userRepository4.findById(userId).get();
         user.setPassword(password);
-        deleteUser(userId);
+        //deleteUser(userId);
         userRepository4.save(user);
         return user;
     }
