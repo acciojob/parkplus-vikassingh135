@@ -4,13 +4,16 @@
  */
 package com.driver.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
@@ -24,11 +27,10 @@ public class Payment {
     private int id;
     private Boolean paymentCompleted;
     
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private PaymentMode paymentMode;
     
-    @OneToOne
-    @JoinColumn
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
     private Reservation reservation;
 
     public Payment() {
