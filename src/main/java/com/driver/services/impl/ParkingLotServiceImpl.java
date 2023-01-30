@@ -6,6 +6,7 @@ import com.driver.model.SpotType;
 import com.driver.repository.ParkingLotRepository;
 import com.driver.repository.SpotRepository;
 import com.driver.services.ParkingLotService;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
           ParkingLot parkingLot = new ParkingLot();
           parkingLot.setName(name);
           parkingLot.setAddress(address);
+          parkingLot.setSpotList(new ArrayList<>());
           parkingLotRepository1.save(parkingLot);
           return parkingLot;
     }
@@ -37,6 +39,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
               spot.setSpotType(SpotType.FOUR_WHEELER);
           } else spot.setSpotType(SpotType.OTHERS);
           spot.setOccupied(Boolean.TRUE);
+          parkingLot.getSpotList().add(spot);
           spotRepository1.save(spot);
           return spot;
     }

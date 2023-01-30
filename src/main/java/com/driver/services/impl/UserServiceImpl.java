@@ -3,6 +3,7 @@ package com.driver.services.impl;
 import com.driver.model.User;
 import com.driver.repository.UserRepository;
 import com.driver.services.UserService;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updatePassword(Integer userId, String password) {
         User user = userRepository4.findById(userId).get();
-         userRepository4.deleteById(userId);
         user.setPassword(password);
         userRepository4.save(user);
         return user;
@@ -32,5 +32,6 @@ public class UserServiceImpl implements UserService {
         user.setName(name);
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
+        user.setReservationList(new ArrayList<>());
     }
 }
