@@ -24,7 +24,7 @@ public class PaymentServiceImpl implements PaymentService {
         //Note that the reservationId always exists
         Payment payment = new Payment();
         Reservation reservation = reservationRepository2.findById(reservationId).get();
-        int cost = reservation.getNumberOfHouses()*reservation.getSpot().getPricePerHouse();
+        int cost = reservation.getNumberOfHours()*reservation.getSpot().getPricePerHour();
         if(cost>amountSent) throw new Exception("Insufficient Amount");
         if(mode.equals("cASh")) {
             payment.setPaymentMode(PaymentMode.CASH);

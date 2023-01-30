@@ -33,16 +33,16 @@ public class ReservationServiceImpl implements ReservationService {
         for(Spot s : spots) {
             if(s.getSpotType()==SpotType.TWO_WHEELER) {
                 if(numberOfWheels<=2) {
-                    if(origSpot==null || origSpot.getPricePerHouse()>s.getPricePerHouse()) origSpot = s;
+                    if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
                 }
             } 
             if(s.getSpotType()==SpotType.FOUR_WHEELER) {
                 if(numberOfWheels<=4) {
-                    if(origSpot==null || origSpot.getPricePerHouse()>s.getPricePerHouse()) origSpot = s;
+                    if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
                 }
             }
             if(s.getSpotType()==SpotType.OTHERS) {
-                if(origSpot==null || origSpot.getPricePerHouse()>s.getPricePerHouse()) origSpot = s;
+                if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
             }
         }
         
@@ -51,7 +51,7 @@ public class ReservationServiceImpl implements ReservationService {
         User user = userRepository3.findById(userId).get();
         
         Reservation reservation = new Reservation();
-        reservation.setNumberOfHouses(timeInHours);
+        reservation.setNumberOfHours(timeInHours);
         reservation.setUser(user);
         reservation.setSpot(origSpot);
         reservationRepository3.save(reservation);
