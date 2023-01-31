@@ -4,6 +4,7 @@
  */
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ public class ParkingLot {
     private String address;
     
     @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Spot> spotList;
 
     public ParkingLot() {

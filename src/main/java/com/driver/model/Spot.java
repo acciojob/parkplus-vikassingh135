@@ -32,7 +32,7 @@ public class Spot {
     
     private int pricePerHour;
     
-    private Boolean occupied;
+    private boolean occupied;
     
     @ManyToOne
     @JoinColumn
@@ -81,11 +81,11 @@ public class Spot {
 
     
 
-    public Boolean getOccupied() {
+    public boolean getOccupied() {
         return occupied;
     }
 
-    public void setOccupied(Boolean occupied) {
+    public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }
 
