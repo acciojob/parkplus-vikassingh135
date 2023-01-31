@@ -42,6 +42,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
           parkingLot.getSpotList().add(spot);
           spot.setReservationList(new ArrayList<>());
           
+          parkingLotRepository1.save(parkingLot);
           spotRepository1.save(spot);
           return spot;
     }
@@ -60,6 +61,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
            spot.setPricePerHour(pricePerHour);
            //spot.setOccupied(true);
            parkingLot.getSpotList().add(spot);
+           parkingLotRepository1.save(parkingLot);
            spotRepository1.save(spot);
            return spot;
     }
