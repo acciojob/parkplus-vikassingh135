@@ -32,17 +32,17 @@ public class ReservationServiceImpl implements ReservationService {
         Spot origSpot = null;
         for(Spot s : spots) {
             //if(s.getOccupied()) continue;
-            if(s.getSpotType()==SpotType.TWO_WHEELER) {
+            if(s.getSpotType().equals(SpotType.TWO_WHEELER)) {
                 if(numberOfWheels<=2) {
                     if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
                 }
             } 
-            if(s.getSpotType()==SpotType.FOUR_WHEELER) {
+            if(s.getSpotType().equals(SpotType.FOUR_WHEELER)) {
                 if(numberOfWheels<=4) {
                     if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
                 }
             }
-            if(s.getSpotType()==SpotType.OTHERS) {
+            if(s.getSpotType().equals(SpotType.OTHERS)) {
                 if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
             }
         }
@@ -58,8 +58,9 @@ public class ReservationServiceImpl implements ReservationService {
         origSpot.setOccupied(true);
         origSpot.getReservationList().add(reservation);
         user.getReservationList().add(reservation);
+        userRepository3.save(user);
         spotRepository3.save(origSpot);
-        reservationRepository3.save(reservation);
+        //reservationRepository3.save(reservation);
         return reservation;
     }
 }
