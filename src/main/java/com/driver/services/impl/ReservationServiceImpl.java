@@ -26,6 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
    //Reserve a spot in the given parkingLot such that the total price is minimum. Note that the price per hour for each spot is different
         //Note that the vehicle can only be parked in a spot having a type equal to or larger than given vehicle
         //If parkingLot is not found, user is not found, or no spot is available, throw "Cannot make reservation" exception.
+<<<<<<< HEAD
         Reservation reservation = new Reservation();
         if(userRepository3.findById(userId) == null){
             throw new Exception("Cannot make reservation");
@@ -60,6 +61,26 @@ public class ReservationServiceImpl implements ReservationService {
                         optimalSpot = spot;
                     }
                 }
+=======
+        if(!userRepository3.existsById(userId)) throw new Exception("Cannot make reservation");
+        if(!parkingLotRepository3.existsById(parkingLotId)) throw new Exception("Cannot make reservation");
+        List<Spot> spots = parkingLotRepository3.findById(parkingLotId).get().getSpotList();
+        Spot origSpot = null;
+        for(Spot s : spots) {
+            //if(s.getOccupied()) continue;
+            if(s.getSpotType().equals(SpotType.TWO_WHEELER)) {
+                if(numberOfWheels<=2) {
+                    if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
+                }
+            } 
+            if(s.getSpotType().equals(SpotType.FOUR_WHEELER)) {
+                if(numberOfWheels<=4) {
+                    if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
+                }
+            }
+            if(s.getSpotType().equals(SpotType.OTHERS)) {
+                if(origSpot==null || origSpot.getPricePerHour()>s.getPricePerHour()) origSpot = s;
+>>>>>>> 388d7d38c64c20fb93fa42788afd1f018624235e
             }
         }
         if(optimalSpot == null){
@@ -67,6 +88,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         optimalSpot.setOccupied(true);
         reservation.setUser(user);
+<<<<<<< HEAD
         reservation.setSpot(optimalSpot);
         reservation.setNumberOfHours(timeInHours);
         List<Reservation> reservations = user.getReservationList();
@@ -77,6 +99,15 @@ public class ReservationServiceImpl implements ReservationService {
         optimalSpot.setReservationList(reservationList);
         userRepository3.save(user);
         spotRepository3.save(optimalSpot);
+=======
+        reservation.setSpot(origSpot);
+        origSpot.setOccupied(true);
+        origSpot.getReservationList().add(reservation);
+        user.getReservationList().add(reservation);
+        userRepository3.save(user);
+        spotRepository3.save(origSpot);
+        //reservationRepository3.save(reservation);
+>>>>>>> 388d7d38c64c20fb93fa42788afd1f018624235e
         return reservation;
     }
 }
